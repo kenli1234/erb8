@@ -5,6 +5,8 @@ from django.http import HttpResponse
 def listings(request):
 #    return HttpResponse("<h1>Hello World</h1>")
     print(request, request.path)
+
+    print('?????????????')
     return render(request, 'listings/listings.html')
 
 def listing(request, listing_id):
