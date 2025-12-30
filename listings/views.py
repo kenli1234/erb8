@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from listings.models import Listing
 from django.core.paginator import Paginator
@@ -19,8 +19,10 @@ def listings(request):
     return render(request, 'listings/listings.html', context)
 
 def listing(request, listing_id):
-    print(request, request.path)
-    return render(request, 'listings/listing.html')
+#    print(request, request.path)
+    listing = get_object_or_404(Listing, pk=listing_id)
+    context = {"listing": listing}
+    return render(request, 'listings/listing.html', context)
 #    return HttpResponse("<h1>about</h1>")
 
 def search(request):
