@@ -28,7 +28,7 @@
                 <div class="col-md-4 mb-3">
                   <label class="sr-only">District</label>
                   <select name="district" class="form-control">
-                    <option selected="true" disabled="disabled">
+                    <option selected="true" value="">
                       District (All)
                     </option>
                       {% for key,value in district_choices.items %}
@@ -38,22 +38,22 @@
                 </div>
                 <div class="col-md-4 mb-3">
                   <label class="sr-only">Bedrooms</label>
-                  <select name="bedrooms" class="form-control">
-                    <option selected="true" disabled="disabled">
+                  <select name="room_type" class="form-control">
+                    <option selected="true" value="">
                       Night (All)
                     </option>
                       {% for key,value in room_choices.items %}
-                        <option value="{{ key }}">{{ value }}</option>
+                        <option value="{{ key }}" {% if values.room_type == key %} selected="true" {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
                 <div class="col-md-4 mb-3">
-                  <select name="price" class="form-control" id="type">
-                    <option selected="true" disabled="disabled">
+                  <select name="rooms" class="form-control" id="type">
+                    <option selected="true" value="">
                       Bedrooms (All)
                     </option>
                       {% for key,value in rooms_choices.items %}
-                        <option value="{{ key }}">{{ value }}</option>
+                        <option value="{{ key }}" {% if values.rooms == key %} selected="true" {% endif %}>{{ value }}</option>
                       {% endfor %}
                   </select>
                 </div>
@@ -89,7 +89,7 @@
       <div class="container">
         <div class="row">
           <!-- Listing 1 -->
-          {% if listings.has_other_pages %}
+          {% if listings %}
           {% for listing in listings %}
           <div class="col-md-6 col-lg-4 mb-4">
             <div class="card listing-preview">

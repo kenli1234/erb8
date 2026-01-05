@@ -103,6 +103,7 @@
 --> 
     <!-- Showcase -->
     {% block content %}
+    {% include 'partials/_alert.html' %}
     <section id="showcase">
       <div class="container text-center">
         <div class="home-search p-5">
@@ -134,7 +135,7 @@
                   <div class="col-md-4 mb-3">
                     <label class="sr-only">District</label>
                     <select name="district" class="form-control">
-                      <option selected="true" disabled="disabled">
+                      <option selected="true" value="">
                         District (All)
                       </option>
                       {% for key,value in district_choices.items %}
@@ -143,21 +144,17 @@
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <label class="sr-only">Bedrooms</label>
-                    <select name="bedrooms" class="form-control">
-                      <option selected="true" disabled="disabled">
-                        Night (All)
-                      </option>
+                    <label class="sr-only">Rooms</label>
+                    <select name="room_type" class="form-control">
+                      <option {% if not values.room_type %} selected="true" value="" {% endif %}>Room Type {All)</option>
                       {% for key,value in room_choices.items %}
                         <option value="{{ key }}">{{ value }}</option>
                       {% endfor %}
                     </select>
                   </div>
                   <div class="col-md-4 mb-3">
-                    <select name="price" class="form-control" id="type">
-                      <option selected="true" disabled="disabled">
-                        Bedrooms (All)
-                      </option>
+                    <select name="rooms" class="form-control" id="type">
+                      <option {% if not values.rooms %} selected="true" value="" {% endif %}>Rooms</option>
                       {% for key,value in rooms_choices.items %}
                         <option value="{{ key }}">{{ value }}</option>
                       {% endfor %}

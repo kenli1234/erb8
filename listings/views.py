@@ -40,14 +40,16 @@ def search(request):
         if district:
             queryset_list = queryset_list.filter(district__iexact=district)
             print('district --', queryset_list)
-    if 'rooms' in request.GET:
-        rooms = request.GET["rooms"]
-        if rooms:
-            queryset_list = queryset_list.filter(rooms__gte=rooms)
+
     if 'room_type' in request.GET:
         room_type = request.GET["room_type"]
         if room_type:
             queryset_list = queryset_list.filter(room_type__iexact=room_type)
+            
+    if 'rooms' in request.GET:
+        rooms = request.GET["rooms"]
+        if rooms:
+            queryset_list = queryset_list.filter(rooms__gte=rooms)
 
     print('*******district**********', request.GET.get('district'))
     print('*******queryset_list**********', len(queryset_list))
