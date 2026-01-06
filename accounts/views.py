@@ -1,6 +1,7 @@
 from django.shortcuts import render, HttpResponse, redirect
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
+from contacts.models import Contact
 import bcrypt
 
 def login(request):
@@ -76,7 +77,9 @@ def register2(request):
         return render(request, 'accounts/register.html')
 
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    user_contacts = Contact.objects.filter(user_id=request.user.id).order_by('-contact_date')
+    context = {"contacts":user_contacts}
+    return render(request, 'accounts/dashboard.html', context)
 
 def logout(request):
     if request.method == "POST":
