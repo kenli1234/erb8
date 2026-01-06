@@ -11,11 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+
 from dotenv import load_dotenv
 import os
 from django.contrib.messages import constants as messages
-
 load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -24,19 +25,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure--nw2dotn_%)1b1%d9ucq2u@jg*1arr30r+ce8x(4i9_&0+s1)s'
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#DEBUG = False
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','localhost']
+ALLOWED_HOSTS = ["127.0.0.1" , "localhost"]
 
 
 # Application definition
 
-#INSTALLED_APPS = [
-DJANOGO_APPS = [
+DJANGO_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,16 +44,18 @@ DJANOGO_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'widget_tweaks',
 ]
 
-APPLICATION_APPS = ['pages.apps.PagesConfig', 
-                    'doctors.apps.DoctorsConfig',
-                    'listings.apps.ListingsConfig',
-                    'accounts.apps.AccountsConfig',
-                    'contacts.apps.ContactsConfig',]
+APPLICATION_APPS =['pages.apps.PagesConfig',
+                   'listings.apps.ListingsConfig',
+                   'doctors.apps.DoctorsConfig',
+                   'accounts.apps.AccountsConfig',
+                   'contacts.apps.ContactsConfig',]
 
-THIRD_PARTY_APPS = ["debug_toolbar",]
-INSTALLED_APPS = DJANOGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
+THIRD_PARTY_APPS = ["debug_toolbar", "taggit",]
+
+INSTALLED_APPS = DJANGO_APPS + APPLICATION_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
@@ -63,7 +65,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware', 
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -136,10 +138,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT=os.path.join(BASE_DIR,'static')
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'config/static')
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,'config/static')
 ]
 
 # Default primary key field type
@@ -147,12 +149,13 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 INTERNAL_IPS = [
     # ...
     "127.0.0.1",
+    "localhost",
     # ...
 ]
 
